@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block content %}
+<table>
+    <tr>
+        <th>user</th>
+        <th>title</th>
+        <th>start time</th>
+        <th>end time</th>
+    </tr>
+    {% for log in logs %}
+    <tr>
+        <td>{{ log.username }}</td>
+        <td>{{ log.title }}</td>
+        <td>{{ log.start_time }}</td>
+        <td>{{ log.end_time }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
