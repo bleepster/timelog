@@ -1,19 +1,25 @@
 {% extends "index.html" %}
 {% block content %}
-<table>
-    <tr>
-        <th>user</th>
-        <th>title</th>
-        <th>start time</th>
-        <th>end time</th>
-    </tr>
-    {% for log in logs %}
-    <tr>
-        <td>{{ log.username }}</td>
-        <td>{{ log.title }}</td>
-        <td>{{ log.start_time }}</td>
-        <td>{{ log.end_time }}</td>
-    </tr>
-    {% endfor %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Log Id</th>
+            <th scope="col">User</th>
+            <th scope="col">Title</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <th scope="row">{{ log.id }}</th>
+            <td>{{ log.username }}</td>
+            <td>{{ log.title }}</td>
+            <td>{{ log.start_time }}</td>
+            <td>{{ log.end_time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock content %}
