@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block content %}
+{% if form.errors %}
+{% for key, value in form.errors.items %}
+<p>{{ key }}:{{ value }}</p>
+{% endfor %}
+{% else %}
+<form action="add" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+</form>
+{% endif %}
+{% endblock content %}
