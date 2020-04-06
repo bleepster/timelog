@@ -1,5 +1,11 @@
-from django.forms import ModelForm, DateInput, TimeInput
-from django.forms import DateTimeInput
+from django.forms import (
+    ModelForm,
+    DateInput,
+    TimeInput,
+    EmailInput,
+    TextInput,
+    Textarea,
+)
 
 from .models import UserTimeLog
 
@@ -15,9 +21,20 @@ class UserLogTimeInput(TimeInput):
 class UserTimeLogForm(ModelForm):
     class Meta:
         model = UserTimeLog
-        fields = ["username", "title", "description", "date", "start_time", "end_time"]
+        fields = ("username", "title", "description", "date", "start_time", "end_time")
         widgets = {
-            "date": UserLogDateInput,
-            "start_time": UserLogTimeInput,
-            "end_time": UserLogTimeInput,
+            "username": EmailInput(
+                attrs={"class": "form-control", "placeholder": "User Name"}
+            ),
+            "title": TextInput(attrs={"class": "form-control", "placeholder": "Title"}),
+            "description": Textarea(
+                attrs={"class": "form-control", "placeholder": "Description"}
+            ),
+            "date": UserLogDateInput(attrs={"class": "form-control"}),
+            "start_time": UserLogTimeInput(
+                attrs={"class": "form-control form-control-sm"}
+            ),
+            "end_time": UserLogTimeInput(
+                attrs={"class": "form-control form-control-sm"}
+            ),
         }
