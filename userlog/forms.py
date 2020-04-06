@@ -4,11 +4,11 @@ from django.forms import DateTimeInput
 from .models import UserTimeLog
 
 
-class DateInput(DateInput):
+class UserLogDateInput(DateInput):
     input_type = "date"
 
 
-class TimeInput(TimeInput):
+class UserLogTimeInput(TimeInput):
     input_type = "time"
 
 
@@ -17,7 +17,7 @@ class UserTimeLogForm(ModelForm):
         model = UserTimeLog
         fields = ["username", "title", "description", "date", "start_time", "end_time"]
         widgets = {
-            "date": DateInput,
-            "start_time": TimeInput,
-            "end_time": TimeInput,
+            "date": UserLogDateInput,
+            "start_time": UserLogTimeInput,
+            "end_time": UserLogTimeInput,
         }
