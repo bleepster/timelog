@@ -15,20 +15,13 @@ def userlog(request, log_id=None):
         try:
             log = UserTimeLog.objects.get(pk=log_id)
             template = loader.get_template("detail_view.html")
-            # FIXME: write a better way to transform the values
+            # FIXME: less code, but still ugly
             context = {
                 "log": {
-                    v: log.__dict__[k]
-                    for k, v in dict(
-                        {
-                            "username": "User Name",
-                            "title": "Title",
-                            "description": "Description",
-                            "date": "Date",
-                            "start_time": "Start Time",
-                            "end_time": "End Time",
-                        }
-                    ).items()
+                    log._meta.get_field(field.name).verbose_name: log.__dict__[
+                        field.name
+                    ]
+                    for field in log._meta.get_fields()
                 }
             }
             return HttpResponse(template.render(context, request))

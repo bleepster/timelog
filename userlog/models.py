@@ -3,9 +3,9 @@ from django.utils.timezone import now
 
 
 class UserTimeLog(models.Model):
-    username = models.EmailField()
-    title = models.CharField(max_length=64)
-    description = models.TextField(null=True, blank=True)
-    date = models.DateField(default=now)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    username = models.EmailField(verbose_name="User Name")
+    title = models.CharField(max_length=64, verbose_name="Title")
+    description = models.TextField(null=True, blank=True, verbose_name="Description")
+    date = models.DateField(default=now, verbose_name="Date")
+    start_time = models.TimeField(verbose_name="Start Time")
+    end_time = models.TimeField(verbose_name="End Time")
