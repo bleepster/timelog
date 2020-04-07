@@ -15,17 +15,20 @@ def userlog(request, log_id=None):
         try:
             log = UserTimeLog.objects.get(pk=log_id)
             template = loader.get_template("detail_view.html")
+            # FIXME: write a better way to transform the values
             context = {
                 "log": {
-                    name: log.__dict__[name]
-                    for name in [
-                        "username",
-                        "title",
-                        "description",
-                        "date",
-                        "start_time",
-                        "end_time",
-                    ]
+                    v: log.__dict__[k]
+                    for k, v in dict(
+                        {
+                            "username": "User Name",
+                            "title": "Title",
+                            "description": "Description",
+                            "date": "Date",
+                            "start_time": "Start Time",
+                            "end_time": "End Time",
+                        }
+                    ).items()
                 }
             }
             return HttpResponse(template.render(context, request))
