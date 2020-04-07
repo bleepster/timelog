@@ -29,13 +29,13 @@ def userlog(request, log_id=None):
             raise Http404("Log Does not exist")
 
 
-def add(request):
+def create(request):
     form = UserTimeLogForm()
     if request.method == "POST":
         form = UserTimeLogForm(request.POST or None)
         if form.is_valid():
             form.save()
             form = UserTimeLogForm()
-    template = loader.get_template("add_form.html")
+    template = loader.get_template("create_view.html")
     context = {"form": form}
     return HttpResponse(template.render(context, request))
