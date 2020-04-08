@@ -1,5 +1,5 @@
-from django.forms import Form
 from django.forms import (
+    Form,
     ModelForm,
     DateInput,
     TimeInput,
@@ -7,7 +7,9 @@ from django.forms import (
     TextInput,
     Textarea,
     EmailField,
+    DateField,
 )
+from django.utils.timezone import now
 
 from .models import UserTimeLog
 
@@ -52,4 +54,12 @@ class UserTimeLogForm(ModelForm):
 class SearchTimeLogForm(Form):
     username = EmailField(
         widget=EmailInput(attrs={"class": "form-control", "placeholder": "User Name"})
+    )
+    date_from = DateField(
+        initial=now,
+        widget=UserLogDateInput(attrs={"class": "form-control", "placeholder": "From"}),
+    )
+    date_to = DateField(
+        initial=now,
+        widget=UserLogDateInput(attrs={"class": "form-control", "placeholder": "To"}),
     )

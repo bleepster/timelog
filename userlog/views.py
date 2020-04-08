@@ -4,6 +4,8 @@ from django.template import loader
 from .models import UserTimeLog
 from .forms import UserTimeLogForm, SearchTimeLogForm
 
+from datetime import datetime
+
 
 def userlog(request, log_id=None):
     if not log_id:
@@ -36,7 +38,21 @@ def search(request):
 
     if request.method == "GET":
         user_name = request.GET["username"]
-        logs = UserTimeLog.objects.filter(username__exact=user_name)
+        request_from = request.GET["date_from"]
+        request_to = request.GET["date_to"]
+        if request_from == request_to:
+            logs = UserTimeLog.objects.filter(
+                username__exact=user_name,
+                date__exact=datetime.strptime(request_from, "%Y-%m-%d"),
+            )
+        else:
+            logs = UserTimeLog.objects.filter(
+                username__exact=user_name,
+                date__range=(
+                    datetime.strptime(request_from, "%Y-%m-%d").date(),
+                    datetime.strptime(request_to, "%Y-%m-%d").date(),
+                ),
+            )
         form = SearchTimeLogForm()
 
     template = loader.get_template("table_view.html")
