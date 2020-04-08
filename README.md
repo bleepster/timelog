@@ -19,6 +19,7 @@ _NOTE_: currently using Python 3.6.9
 - [x] User Log Detailed View
 - [ ] Search by Username
 - [ ] Search by Date
+- [ ] Pagination
 - [ ] Edit User Log 
 - [ ] Delete User Log
 - [ ] Link the Table View with the Detailed View
