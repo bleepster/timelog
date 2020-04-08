@@ -21,7 +21,14 @@ class UserLogTimeInput(TimeInput):
 class UserTimeLogForm(ModelForm):
     class Meta:
         model = UserTimeLog
-        fields = ("username", "title", "description", "date", "start_time", "end_time")
+        fields = (
+            "username",
+            "title",
+            "description",
+            "date",
+            "start_time",
+            "end_time",
+        )
         widgets = {
             "username": EmailInput(
                 attrs={"class": "form-control", "placeholder": "User Name"}
@@ -36,5 +43,16 @@ class UserTimeLogForm(ModelForm):
             ),
             "end_time": UserLogTimeInput(
                 attrs={"class": "form-control form-control-sm"}
+            ),
+        }
+
+
+class SearchTimeLogForm(ModelForm):
+    class Meta:
+        model = UserTimeLog
+        fields = ("username",)
+        widgets = {
+            "username": EmailInput(
+                attrs={"class": "form-control", "placeholder": "User Name"}
             ),
         }

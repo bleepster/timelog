@@ -17,7 +17,7 @@ _NOTE_: currently using Python 3.6.9
 
 ### TODO
 - [x] User Log Detailed View
-- [ ] Search by Username
+- [X] Search by Username
 - [ ] Search by Date
 - [ ] Pagination
 - [ ] Edit User Log 
