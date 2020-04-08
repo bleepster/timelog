@@ -1,3 +1,4 @@
+from django.forms import Form
 from django.forms import (
     ModelForm,
     DateInput,
@@ -5,6 +6,7 @@ from django.forms import (
     EmailInput,
     TextInput,
     Textarea,
+    EmailField,
 )
 
 from .models import UserTimeLog
@@ -47,12 +49,7 @@ class UserTimeLogForm(ModelForm):
         }
 
 
-class SearchTimeLogForm(ModelForm):
-    class Meta:
-        model = UserTimeLog
-        fields = ("username",)
-        widgets = {
-            "username": EmailInput(
-                attrs={"class": "form-control", "placeholder": "User Name"}
-            ),
-        }
+class SearchTimeLogForm(Form):
+    username = EmailField(
+        widget=EmailInput(attrs={"class": "form-control", "placeholder": "User Name"})
+    )
